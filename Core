@@ -1,0 +1,53 @@
+https://github.com/Taurusprince/Favib.git
+import random
+
+# Define characters with simple characteristics
+characters = {
+    "Superman": {"strength": 90, "defense": 80},
+    "Batman": {"strength": 70, "defense": 85},
+    "Michael the Archangel": {"strength": 85, "defense": 90},
+    "Lucifer": {"strength": 88, "defense": 85},
+    "Xena": {"strength": 75, "defense": 80}
+}
+
+# Function to simulate a single battle
+def simulate_battle(team1, team2):
+    team1_score = sum([characters[char]["strength"] for char in team1])
+    team2_score = sum([characters[char]["strength"] for char in team2])
+    return team1_score > team2_score
+
+# Function to simulate multiple battles and determine the winner
+def simulate_tournament(team1, team2, num_battles=1000):
+    team1_wins = 0
+    team2_wins = 0
+    for _ in range(num_battles):
+        if simulate_battle(team1, team2):
+            team1_wins += 1
+        else:
+            team2_wins += 1
+    return team1_wins, team2_wins
+
+# Function to run the game
+def run_game():
+    print("Welcome to Fantasy Valor AI Battle!")
+    print("Choose your team of 3 characters from the following list:")
+    for char in characters:
+        print(char)
+    
+    team1 = [input("Player 1, choose your character: ") for _ in range(3)]
+    team2 = [input("Player 2, choose your character: ") for _ in range(3)]
+    
+    print("\nSimulating battles...")
+    team1_wins, team2_wins = simulate_tournament(team1, team2)
+    
+    print(f"\nResults after 1000 battles:")
+    print(f"Team 1 wins: {team1_wins}")
+    print(f"Team 2 wins: {team2_wins}")
+    
+    if team1_wins > team2_wins:
+        print("Team 1 is the overall winner!")
+    else:
+        print("Team 2 is the overall winner!")
+
+# Run the game
+run_game()
